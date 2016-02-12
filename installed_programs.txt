@@ -1,0 +1,114 @@
+# Install Copy
+sudo add-apt-repository ppa:paolorotolo/copy
+sudo apt-get update
+sudo apt-get install copy
+
+# Installed anaconda in /home/debora/opt/anaconda
+bash Anaconda-2.3.0-Linux-x86_64.sh
+
+# Installed using sudo apt-get:
+# vim
+# mendeleydesktop
+# to open pdf from the command line using gnome-open
+sudo apt-get install libgnome2-bin
+
+# Latex-related stuff
+sudo apt-get install texlive-latex-base
+sudo apt-get install texlive
+sudo apt-get install texlive-fonts-extra
+
+#http://askubuntu.com/questions/485514/how-to-properly-install-and-use-texlive-with-package-manager-in-14-04
+#package manager for latex
+tlmgr init-usertree
+sudo apt-get install xzdec
+tlmgr install multirow
+... and other latex packages
+
+###
+
+#15-oct-2015
+
+#installing samtools
+tar xjfv samtools-1.2.tar.bz2
+cd samtools-1.2/
+#make
+### ERROR
+#fatal error: zlib.h: No such file or directory
+#sudo apt-get install build-essential
+#sudo apt-get install libz-dev
+#make
+### ERROR
+#fatal error: curses.h: No such file or directory
+# https://help.ubuntu.com/community/CompilingEasyHowTo
+sudo apt-get install build-essential checkinstall
+sudo apt-get install cvs subversion git-core mercurial
+sudo chown $USER /usr/local/src
+sudo chmod u+rwx /usr/local/src
+#put tarball files in /usr/local/src and run make...
+### ERROR
+#fatal error: curses.h: No such file or directory
+#sudo apt-get update
+#sudo apt-get upgrade
+#make
+# same ERROR
+# https://www.howtoforge.com/curses.h-no-such-file-or-directory
+sudo apt-get install libncurses5-dev libncursesw5-dev
+make
+
+# installing vim plugin manager - Vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# installing vim-R
+# https://github.com/vsbuffalo/devnotes/wiki/Vim,-R,-and-Tmux:-Minimal-Configuration
+sudo apt-get install r-base
+sudo apt-get install tmux
+
+---
+
+# 22-oct-2015
+
+sudo apt-get install pandoc
+sudo apt-get install vcftools
+
+---
+
+# 28-oct-2015
+
+pip install biopython
+
+---
+
+# 04-nov-2015
+
+## Install FastQC
+
+- install java
+	sudo apt-get install default-jre
+- install FastQC itself
+	download and unzip file from http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.4.zip into /home/debora/opt
+	- make fastqc wrapper executable
+		chmod 755 fastqc
+	- and accessible from everywhere
+		sudo ln -s fastqc /usr/local/bin/fastqc
+
+---
+
+# 16-nov-2015
+
+sudo apt-get install pdftk
+
+---
+
+# 24-nov-2015
+
+pip install simuPOP
+
+# install ms
+
+- Download ms.tar.gz from
+https://webshare.uchicago.edu/xythoswfs/webview/fileManager?stk=D9B7E48498C6286&entryName=%2Fusers%2Frhudson1%2FPublic%2Fms.folder&msgStatus=
+
+- cd msdir/
+
+- gcc -o ms ms.c streec.c rand2.c -lm
+

@@ -72,4 +72,4 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 " highlight current line
 set cursorline
 " use bold, etc other than underline to highlight current line
-hi CursorLine term=bold cterm=bold guibg=Grey40
+hi CursorLine term=bold cterm=bold guibg=Grey40 ctermbg=black
