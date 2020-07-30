@@ -15,21 +15,25 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'jalvesaq/R-Vim-runtime'
-Plugin 'vim-scripts/vim-R-plugin'
-Plugin 'Shougo/neocomplete.vim'
+" [example] Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/Vim-R-plugin'
+Plugin 'Shougo/neocomplete.vim'                                                                                                                            
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'jpalardy/vim-slime'
+Plugin 'hanschen/vim-ipython-cell'
+
 " plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
+" Plugin 'L9'
 " Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
+" [example] Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
+" [example] Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+" [example] Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -45,18 +49,68 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-"
-" R plugin settings
+" R script settings
 let maplocalleader = ","
-"vmap <Space> <Plug>RDSendSelection " when in normal mode, send selection to R with space bar
-"nmap <Space> <Plug>RDSendLine " when in normal mode, send line to R with space bar
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
 let vimrplugin_applescript=0
-let vimrplugin_vsplit=1 " split window vertically when opening R
-let vimrplugin_assign_map = "--"
+let vimrplugin_vsplit=1
+let vimrplugin_assign_map = "--" 
 
+"------------------------------------------------------------------------------
+" slime configuration
+"------------------------------------------------------------------------------
+" always use tmux
+let g:slime_target = 'tmux'
+let g:slime_paste_file = "$HOME/.slime_paste"
+
+" fix paste issues in ipython
+let g:slime_python_ipython = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": ":.1"}
+
+"------------------------------------------------------------------------------
+" ipython-cell configuration
+"------------------------------------------------------------------------------
+" Keyboard mappings. <Leader> is \ (backslash) by default
+" <localleader> is ,
+
+" map <localleader>s to start IPython
+nnoremap <localleader>rf :SlimeSend1 ipython --matplotlib<CR>
+" map <localleader>r to run script
+nnoremap <localleader>aa :IPythonCellRun<CR>
+" map <localleader>R to run script and time the execution
+nnoremap <localleader>at :IPythonCellRunTime<CR>
+" map <localleader>c to execute the current cell
+nnoremap <localleader>cc :IPythonCellExecuteCell<CR>
+" map <localleader>C to execute the current cell and jump to the next cell
+nnoremap <localleader>ca :IPythonCellExecuteCellJump<CR>
+" map <localleader>l to clear IPython screen
+nnoremap <localleader>rr :IPythonCellClear<CR>
+" map <localleader>x to close all Matplotlib figure windows
+nnoremap <localleader>x :IPythonCellClose<CR>
+" map [c and ]c to jump to the previous and next cell header
+nnoremap [c :IPythonCellPrevCell<CR>
+nnoremap ]c :IPythonCellNextCell<CR>
+" map <localleader>h to send the current line or current selection to IPython
+nmap <localleader>l <Plug>SlimeLineSend
+nmap <Space> <Plug>SlimeLineSend
+xmap <localleader>pp <Plug>SlimeRegionSend
+xmap <Space> <Plug>SlimeRegionSend
+" map <localleader>p to run the previous command
+nnoremap <localleader>pr :IPythonCellPrevCommand<CR>
+" map <localleader>Q to restart ipython
+nnoremap <localleader>R :IPythonCellRestart<CR>
+" map <localleader>d to start debug mode
+nnoremap <localleader>D :SlimeSend1 %debug<CR>
+" map <localleader>q to exit debug mode or IPython
+nnoremap <localleader>Q :SlimeSend1 exit<CR>
+
+"------------------------------------------------------------------------------
 " basic vim settings
+"------------------------------------------------------------------------------
 set rnu
 set nu
+syntax on
 
 " size of a hard tabstop
 " a combination of spaces and tabs are used to simulate tab stops at a width
