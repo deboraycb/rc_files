@@ -1,6 +1,6 @@
 # rc_files
 
-## to install vim plugins
+## to install vim-R and vim-python plugins
 
 - Download .vimrc to $HOME:
 ```
