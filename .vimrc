@@ -51,8 +51,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 " R script settings
 let maplocalleader = ","
-vmap <Space> <Plug>RDSendSelection
-nmap <Space> <Plug>RDSendLine
+"vmap <Space> <Plug>RDSendSelection
+"nmap <Space> <Plug>RDSendLine
 let vimrplugin_applescript=0
 let vimrplugin_vsplit=1
 let vimrplugin_assign_map = "--" 
@@ -62,15 +62,17 @@ let vimrplugin_assign_map = "--"
 "------------------------------------------------------------------------------
 " always use tmux
 let g:slime_target = 'tmux'
-let g:slime_paste_file = "$HOME/.slime_paste"
+let g:slime_paste_file = expand("$HOME/.slime_paste")
 
 " fix paste issues in ipython
 let g:slime_python_ipython = 1
-let g:slime_default_config = {"socket_name": "default", "target_pane": ":.1"}
+let g:slime_default_config = {"socket_name": get(split($TMUX,","),0), "target_pane": ":.1"}
 
 "------------------------------------------------------------------------------
 " ipython-cell configuration
 "------------------------------------------------------------------------------
+"see vim-ipython-cell faq
+let g:ipython_cell_prefer_external_copy = 1
 " Keyboard mappings. <Leader> is \ (backslash) by default
 " <localleader> is ,
 
